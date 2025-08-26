@@ -134,9 +134,7 @@
     .disclaimer { margin-top: 40px; text-align: center; font-size: 0.95rem; color: #6b7280; animation: fadeIn 2s ease-in-out; }
     @keyframes fadeIn { 0% {opacity: 0;} 100% {opacity: 1;} }
 
-    @media (min-width: 768px) {
-      #app-list { grid-template-columns: 1fr 1fr; gap: 24px; }
-    }
+    @media (min-width: 768px) { #app-list { grid-template-columns: 1fr 1fr; gap: 24px; } }
   </style>
 </head>
 <body>
@@ -153,12 +151,11 @@
   <div class="skeleton-card"></div>
 </div>
 
-<div class="disclaimer">
-  📌 Developed by Johan de Beer. Data updates live from secure cloud storage.
-</div>
+<div class="disclaimer">📌 Developed by Johan de Beer. Data updates live from secure cloud storage.</div>
 
 <script>
-  const CSV_URL = 'https://raw.githubusercontent.com/johandebeer21/Tracker-Demo/main/tracker3.csv';
+  // ✅ Tracker 3 CSV URL
+  const CSV_URL = 'https://raw.githubusercontent.com/johandebeer21/Tracker-Demo/refs/heads/main/tracker3.csv';
 
   let applications = [];
 
@@ -217,7 +214,7 @@
   function fetchData() {
     appList.innerHTML = '<div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div>';
     clientInfoDiv.textContent = 'Loading client info...';
-    const urlWithCacheBust = CSV_URL + '&cacheBust=' + Date.now();
+    const urlWithCacheBust = CSV_URL + '?cacheBust=' + Date.now();
     fetch(urlWithCacheBust)
       .then(res => res.ok ? res.text() : Promise.reject('Failed to fetch'))
       .then(text => {
